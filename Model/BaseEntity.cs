@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,11 +20,11 @@ public class BaseEntity<T> where T : struct
     /// <summary>
     /// 
     /// </summary>
-    public DateTime CreatedDataTime { get; private set; } = DateTime.Now;
+    public DateTime? CreatedDataTime { get; private set; } = DateTime.Now;
     /// <summary>
     /// 
     /// </summary>
-    public DateTime UpdatedDataTime { get; private set; }
+    public DateTime? UpdatedDataTime { get; private set; }
     /// <summary>
     /// 
     /// </summary>
