@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/App.Web/Pages/Category/EditCategory.cshtml
+/App.Web/Pages/Category/EditCategory.cshtml.cs
