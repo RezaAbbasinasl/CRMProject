@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.TableConfig;
 
-internal class CategoryConfig : BaseEntityTypeConfiguration<Category,Guid>
+internal class CategoryConfig : BaseEntityTypeConfiguration<Category>
 {
     public override void Configure(EntityTypeBuilder<Category> builder)
     {
@@ -24,6 +24,6 @@ internal class CategoryConfig : BaseEntityTypeConfiguration<Category,Guid>
         builder.Property(c => c.Name).IsRequired().HasColumnType(SqlDbType.NVarChar.ToString()).HasMaxLength(200);
         builder.Property(c => c.Description).IsRequired().HasColumnType(SqlDbType.NVarChar.ToString()).HasMaxLength(400);
 
-        builder.HasOne(c => c.Departement).WithMany(c => c.Categories).HasForeignKey(c => c.DepartementId).OnDelete(DeleteBehavior.NoAction);
+        builder.HasOne(c => c.Departement).WithMany(c => c.Categories).HasForeignKey(c => c.DepartementId).OnDelete(DeleteBehavior.Cascade);
     }
 }

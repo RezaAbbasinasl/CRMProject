@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.TableConfig
 {
-    internal class TicketConfig : BaseEntityTypeConfiguration<Ticket, Guid>
+    internal class TicketConfig : BaseEntityTypeConfiguration<Ticket>
     {
         public override void Configure(EntityTypeBuilder<Ticket> builder)
         {
@@ -29,8 +29,8 @@ namespace Infrastructure.TableConfig
             builder.Property(t => t.PriorityId).IsRequired().HasDefaultValue(Prioritys.Medium);            
             builder.Property(t => t.ScoringId).IsRequired().HasDefaultValue(Scoring.none);            
 
-            builder.HasOne(t => t.Category).WithMany(t => t.Tickets).HasForeignKey(t => t.CategoryId).OnDelete(DeleteBehavior.NoAction);
-            builder.HasMany(t => t.Messages).WithOne(t => t.Ticket).HasForeignKey(t => t.TicketId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(t => t.Category).WithMany(t => t.Tickets).HasForeignKey(t => t.CategoryId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(t => t.Messages).WithOne(t => t.Ticket).HasForeignKey(t => t.TicketId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

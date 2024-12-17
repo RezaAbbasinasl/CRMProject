@@ -8,7 +8,7 @@ namespace Model.Entities;
 /// <summary>
 /// Category Entity
 /// </summary>
-public class Category : BaseEntity<Guid>
+public class Category : BaseEntity
 {
     /// <summary>
     /// The category name of category entity
@@ -17,7 +17,7 @@ public class Category : BaseEntity<Guid>
     /// <summary>
     /// The category description of category entity
     /// </summary>
-    public string Description { get; set; } = string.Empty;
+    public string? Description { get; set; } 
 
     /// <summary>
     /// The list ticket of category entity

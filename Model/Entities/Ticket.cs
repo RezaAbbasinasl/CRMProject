@@ -8,7 +8,7 @@ namespace Model.Entities;
 /// <summary>
 /// Ticket Entity
 /// </summary>
-public class Ticket : BaseEntity<Guid>
+public class Ticket : BaseEntity
 {
     /// <summary>
     /// The subject of ticket entity

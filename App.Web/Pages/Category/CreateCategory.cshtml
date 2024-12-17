@@ -1,0 +1,24 @@
+﻿@page
+@model App.Web.Pages.Category.CreateCategoryModel
+
+
+<form method="post">
+    <div class="form-group">
+    <label asp-for="Input.Category.Name"></label>
+            <input class="form-control" asp-for="Input.Category.Name" />
+            <span asp-validation-for="Input.Category.Name"></span>
+    </div>        
+    <div class="form-group">
+            <label asp-for="Input.Category.Description"></label>
+            <input class="form-control" asp-for="Input.Category.Description" />
+            <span asp-validation-for="Input.Category.Description"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.Category.DepartementId"></label>
+        <select asp-for="Input.Category.DepartementId" class="form-control" asp-items="@(new SelectList(Model.Input.Departements, "Id","Name"))"></select>
+        <span asp-validation-for="Input.Category.DepartementId"></span>
+    </div>
+  
+    <button type="submit" class="btn btn-success mt-3">Create New Category</button>
+</form> 
+

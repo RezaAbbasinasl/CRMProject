@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Web", "App.Web\App.Web.csproj", "{7EF3C132-A9C9-4014-BB23-E2F3BE9FD5EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{B98A7F69-9EAD-4F53-9BD5-11EB4062F085}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{B98A7F69-9EAD-4F53-9BD5-11EB4062F085}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{2B7C957C-2E74-4C77-8D41-33EEAD85A228}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{2B7C957C-2E74-4C77-8D41-33EEAD85A228}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{781F75BB-8736-498F-9E2E-48FED98DCE6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{781F75BB-8736-498F-9E2E-48FED98DCE6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{DBC50E3B-ACA1-4A22-8961-8B3D3003612F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{DBC50E3B-ACA1-4A22-8961-8B3D3003612F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataTransferObject", "DataTransferObject\DataTransferObject.csproj", "{A840ADF0-5513-479A-9A46-3B8684561426}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTransferObject", "DataTransferObject\DataTransferObject.csproj", "{A840ADF0-5513-479A-9A46-3B8684561426}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Web", "App.Web\App.Web.csproj", "{B5E535B9-1303-47CD-9857-87BAEEED192B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7EF3C132-A9C9-4014-BB23-E2F3BE9FD5EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7EF3C132-A9C9-4014-BB23-E2F3BE9FD5EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7EF3C132-A9C9-4014-BB23-E2F3BE9FD5EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7EF3C132-A9C9-4014-BB23-E2F3BE9FD5EA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B98A7F69-9EAD-4F53-9BD5-11EB4062F085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B98A7F69-9EAD-4F53-9BD5-11EB4062F085}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B98A7F69-9EAD-4F53-9BD5-11EB4062F085}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{A840ADF0-5513-479A-9A46-3B8684561426}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A840ADF0-5513-479A-9A46-3B8684561426}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A840ADF0-5513-479A-9A46-3B8684561426}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5E535B9-1303-47CD-9857-87BAEEED192B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5E535B9-1303-47CD-9857-87BAEEED192B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5E535B9-1303-47CD-9857-87BAEEED192B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5E535B9-1303-47CD-9857-87BAEEED192B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,7 +8,7 @@ namespace Model.Entities;
 /// <summary>
 /// Message Entity
 /// </summary>
-public class Message : BaseEntity<Guid>
+public class Message : BaseEntity
 {
     /// <summary>
     /// The content of message entity
