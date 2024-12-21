@@ -1,10 +1,12 @@
 ﻿using DataTransferObject.DTOClasses;
 using Infrastructure.RepositoryPattern;
+using Infrastructure.RepositoryPattern.Classes;
 using Infrastructure.RepositoryPattern.Interfaces;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Model.Entities;
 using Service.ServiceInterfaces;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +33,7 @@ public class DepartementService : IDepartementService
         var resultDepartement = await _departementRepository.CreateDataAsync(departement.Adapt<Departement>());
 
         if (resultDepartement == null)
-            throw new Exception("");
+            throw new Exception("Department not created.");
 
         return true;
 
@@ -45,7 +47,7 @@ public class DepartementService : IDepartementService
             departementResult = new List<Departement>();
 
         
-        var result =   departementResult.Select(d => d.Adapt<DepartementDTO>()).ToList();
+        var result = departementResult.Select(d => d.Adapt<DepartementDTO>()).ToList();
         return result;
     }
     public async Task<DepartementDTO> GetDepartement(string departementId)
@@ -53,7 +55,7 @@ public class DepartementService : IDepartementService
         var department = await _departementRepository.GetAsync(new Guid(departementId));
         
         if (department == null)
-            throw new Exception("");
+            throw new Exception("There is no such departement.");
 
         return department.Adapt<DepartementDTO>();
 
@@ -62,12 +64,12 @@ public class DepartementService : IDepartementService
     public async Task<bool> DeleteDepartement(Guid departementId, Guid userId)
     {
         if (userId == Guid.Empty)
-            throw new Exception("");
+            throw new Exception("The user ID is incorrect.");
 
         var user = await _userManager.FindByIdAsync(userId.ToString());
 
         if (user == null)
-            throw new Exception("");
+            throw new Exception("User not found.");
 
         var departement = await _departementRepository.GetAsync(departementId);
         bool isValid = false;
@@ -83,7 +85,7 @@ public class DepartementService : IDepartementService
     public async Task<bool> UpdateDepartement(DepartementDTO departement, Guid userId)
     {
         if (userId == Guid.Empty)
-            throw new Exception("");
+            throw new Exception("The user ID is incorrect");
 
         var user = await _userManager.FindByIdAsync(userId.ToString());
         bool isValid = false;
@@ -94,5 +96,16 @@ public class DepartementService : IDepartementService
             isValid = true;
         }
         return isValid;
+    }
+
+    public async Task<PaginatedList<DepartementDTO>> GetDepartementListAsPagination(int pagesize, int pageindex, string searchName)
+    {
+        List<Departement> departements = await _departementRepository.QueryAsync(c => true);
+
+        if (!string.IsNullOrEmpty(searchName))
+            departements = departements.Where(c => c.Name.Contains(searchName)).ToList();
+
+        PaginatedList<Departement> data = PaginatedList<Departement>.Create(departements, pageindex, pagesize);
+        return new PaginatedList<DepartementDTO>(data.Select(c => c.Adapt<DepartementDTO>()).ToList(), departements.Count(), pageindex, pagesize);
     }
 }

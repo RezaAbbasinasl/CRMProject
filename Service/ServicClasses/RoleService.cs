@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Model.Entities;
 using Service.ServiceInterfaces;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,8 @@ public class RoleService : IRoleService
         if (user == null)
             throw new Exception("");
 
+        role.CreateUserId = userId;
+
         bool isValid = false;
         var resultRole = await _roleManager.CreateAsync(role.Adapt<Role>());
 
@@ -43,14 +46,9 @@ public class RoleService : IRoleService
 
     }
 
-    public async Task<List<RoleDTO>> AllRole(Guid userId)
+    public async Task<List<RoleDTO>> AllRole()
     {
-        if (userId == Guid.Empty)
-            throw new Exception("");
-
-        var roles = await _roleManager.Roles.Select(x => x.Adapt<RoleDTO>()).ToListAsync();
-
-        return roles;
+        return await _roleManager.Roles.Select(x => x.Adapt<RoleDTO>()).ToListAsync();         
     }
 
     public async Task<bool> DeleteRole(Guid roleId, Guid userId)
@@ -92,6 +90,17 @@ public class RoleService : IRoleService
         return resultRole.Adapt<RoleDTO>();
     }
 
+    public async Task<PaginatedList<RoleDTO>> GetRoleListAsPagination(int pagesize, int pageindex, string searchName)
+    {
+        List<Role> roles = await _roleManager.Roles.Select(r => r.Adapt<Role>()).ToListAsync();
+
+        if (!string.IsNullOrEmpty(searchName))
+            roles = roles.Where(c => c.Name.Contains(searchName)).ToList();
+
+        PaginatedList<Role> data = PaginatedList<Role>.Create(roles, pageindex, pagesize);
+        return new PaginatedList<RoleDTO>(data.Select(c => c.Adapt<RoleDTO>()).ToList(), roles.Count(), pageindex, pagesize);
+    }
+
     public async Task<bool> UpdateRole(RoleDTO role, Guid userId)
     {
         if (userId == Guid.Empty || role.Id == Guid.Empty)
@@ -106,7 +115,11 @@ public class RoleService : IRoleService
         bool isValid = false;
         if(resultRole != null)
         {
-            await _roleManager.UpdateAsync(role.Adapt<Role>());
+            resultRole.Name = role.Name;
+            resultRole.RoleDescription = role.RoleDescription;
+            resultRole.UpdatedUserId = role.UpdatedUserId;            
+            await _roleManager.UpdateAsync(resultRole);
+            
             isValid = true;
         }
 

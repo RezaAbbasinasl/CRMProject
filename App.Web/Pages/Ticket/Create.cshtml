@@ -1,0 +1,28 @@
+﻿@page
+@model App.Web.Pages.Ticket.CreateModel
+@{
+}
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Input.TicketModel.Subject"></label>
+        <input class="form-control" asp-for="Input.TicketModel.Subject" />
+        <span asp-validation-for="Input.TicketModel.Subject"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.TicketModel.Description"></label>
+        <input class="form-control" asp-for="Input.TicketModel.Description" />
+        <span asp-validation-for="Input.TicketModel.Description"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.TicketModel.CategoryId"></label>
+        <select asp-for="Input.TicketModel.CategoryId" class="form-control" asp-items="@(new SelectList(Model.Input.Categories, "Id","Name"))"></select>
+        <span asp-validation-for="Input.TicketModel.CategoryId"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Create New Ticket</button>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

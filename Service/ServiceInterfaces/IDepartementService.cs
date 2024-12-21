@@ -1,5 +1,6 @@
 ﻿using DataTransferObject.DTOClasses;
 using Model.Entities;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,4 +17,5 @@ public interface IDepartementService
     Task<bool> UpdateDepartement(DepartementDTO departement, Guid userId);
     Task<DepartementDTO> GetDepartement(string departementId);
     Task<List<DepartementDTO>> AllDepartement(Expression<Func<Departement, bool>> predicate);
+    Task<PaginatedList<DepartementDTO>> GetDepartementListAsPagination(int pagesize, int pageindex, string searchName);
 }

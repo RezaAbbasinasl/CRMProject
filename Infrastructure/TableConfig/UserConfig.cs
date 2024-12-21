@@ -25,6 +25,6 @@ internal class UserConfig : IEntityTypeConfiguration<User>
         builder.HasOne(u => u.CreatedUser).WithMany().HasForeignKey(u => u.CreatedUserId).IsRequired().OnDelete(DeleteBehavior.NoAction);
         builder.HasOne(u => u.UpdatedUser).WithMany().HasForeignKey(u => u.UpdatedUserId).IsRequired(false).OnDelete(DeleteBehavior.NoAction);
         builder.HasOne(u => u.Departement).WithMany(u => u.Users).HasForeignKey(u => u.DepartementId).IsRequired(false).OnDelete(DeleteBehavior.NoAction);
-        builder.HasMany(u => u.Tickets).WithOne(u => u.Author).HasForeignKey(u => u.AuthorId).IsRequired().OnDelete(DeleteBehavior.NoAction);
+        builder.HasMany(u => u.Tickets).WithOne(u => u.Author).HasForeignKey(u => u.AuthorId).IsRequired(false).OnDelete(DeleteBehavior.NoAction);
     }
 }

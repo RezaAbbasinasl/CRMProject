@@ -259,7 +259,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("CreatedDataTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 12, 16, 16, 7, 51, 553, DateTimeKind.Local).AddTicks(5786));
+                        .HasDefaultValue(new DateTime(2024, 12, 18, 13, 42, 45, 741, DateTimeKind.Local).AddTicks(8858));
 
                     b.Property<Guid?>("CreatedUserId")
                         .IsRequired()
@@ -307,7 +307,7 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AuthorId")
+                    b.Property<Guid?>("AuthorId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CategoryId")
@@ -382,7 +382,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("CreatedDataTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 12, 16, 16, 7, 51, 556, DateTimeKind.Local).AddTicks(7256));
+                        .HasDefaultValue(new DateTime(2024, 12, 18, 13, 42, 45, 744, DateTimeKind.Local).AddTicks(7544));
 
                     b.Property<Guid?>("CreatedUserId")
                         .IsRequired()
@@ -620,8 +620,7 @@ namespace Infrastructure.Migrations
                     b.HasOne("Model.Entities.User", "Author")
                         .WithMany("Tickets")
                         .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Model.Entities.Category", "Category")
                         .WithMany("Tickets")

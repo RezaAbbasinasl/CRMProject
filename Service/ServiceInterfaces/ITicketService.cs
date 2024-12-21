@@ -1,5 +1,6 @@
 ﻿using DataTransferObject.DTOClasses;
 using Model.Entities;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,4 +16,5 @@ public interface ITicketService
     Task<bool> DeleteTicket(Guid userId, Guid ticketId);
     Task<List<TicketDTO>> AllTickt(Expression<Func<Ticket, bool>> predicate);
     Task<Ticket> GetTicket(Guid userId, Guid ticketId);
+    Task<PaginatedList<TicketDTO>> GetTicketListAsPagination(int pagesize, int pageindex, string searchName);
 }

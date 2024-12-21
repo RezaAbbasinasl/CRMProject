@@ -39,9 +39,9 @@ public class CategoryService : ICategoryService
         return isValid;
     }
 
-    public async Task<List<CategoryDTO>> AllCategory(Expression<Func<Category, bool>> predicate = null)
+    public async Task<List<CategoryDTO>> AllCategory()
     {
-        var categorys = await _categoryRepository.QueryAsync(predicate ?? (p => true));
+        var categorys = await _categoryRepository.QueryAsync(p => true);
         if (categorys == null)
             categorys = new();
 
@@ -51,15 +51,15 @@ public class CategoryService : ICategoryService
     public async Task<bool> DeleteCategory(Guid categoryId, string userId)
     {
         if (userId.IsNullOrEmpty())
-            throw new Exception("");
+            throw new Exception("The user ID is incorrect.");
 
         var user = await _userManager.FindByIdAsync(userId);
 
         if (user == null)
-            throw new Exception("");
+            throw new Exception("User not found.");
 
         if (categoryId == Guid.Empty)
-            throw new Exception();
+            throw new Exception("The categoryId is incorrect. ");
 
         return await _categoryRepository.DeleteDataAsync(categoryId);
     }
@@ -69,7 +69,7 @@ public class CategoryService : ICategoryService
         var category = await _categoryRepository.GetAsync(categoryId);
 
         if (category == null)
-            throw new Exception("");
+            throw new Exception("There is no such Catagory.");
 
         return category.Adapt<CategoryDTO>();
     }
@@ -85,17 +85,21 @@ public class CategoryService : ICategoryService
         return new PaginatedList<CategoryDTO>(data.Select(c => c.Adapt<CategoryDTO>()).ToList(), categorys.Count(), pageindex, pagesize);
     }
 
-    public async Task<bool> UpdateCategory(CategoryDTO category, string userId)
+    public async Task<bool> UpdateCategory(EditCategoryDTO category, string userId)
     {
         if (userId.IsNullOrEmpty())
-            throw new Exception("");
+            throw new Exception("The user ID is incorrect.");
 
         var user = await _userManager.FindByIdAsync(userId);
 
         if (user == null)
-            throw new Exception("");
+            throw new Exception("User not found.");
 
-        var resultCategory = await _categoryRepository.UpdateDataAsync(category.Adapt<Category>());
+        var fullCategory = await GetCategory(category.Id);
+        fullCategory.Name = category.Name;
+        fullCategory.Description = category.Description;
+
+        var resultCategory = await _categoryRepository.UpdateDataAsync(fullCategory.Adapt<Category>());
         bool isValid = true;
 
         if (resultCategory == null)

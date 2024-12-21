@@ -6,7 +6,7 @@ using Service.ServiceInterfaces;
 using System.Security.Claims;
 
 namespace App.Web.Pages.Category;
-[Authorize]
+[Authorize (Roles ="Admin")]
 public class CreateCategoryModel : PageModel
 {
     private readonly IDepartementService _departementService;
@@ -49,7 +49,7 @@ public class CreateCategoryModel : PageModel
                 await _categoryService.AddCategory(category);
 
                 TempData["SuccessMessage"] = "CreateNewCategory Successful";
-                return LocalRedirect("/Home/index");
+                return LocalRedirect("/Category/index");
             }
             catch (Exception ex)
             {

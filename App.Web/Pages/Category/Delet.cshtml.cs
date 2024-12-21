@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 namespace App.Web.Pages.Category
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [BindProperties]
     public class DeletModel : PageModel
     {

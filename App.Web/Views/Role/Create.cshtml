@@ -1,0 +1,16 @@
+﻿@model RoleDTO
+
+<form asp-action="Create">
+    <div class="form-floating mb-3">
+        <input asp-for="Name" class="form-control" aria-required="true" placeholder="Name" />
+        <label asp-for="Name">Name</label>
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-floating mb-3">
+        <input asp-for="RoleDescription" class="form-control" aria-required="true" placeholder="Description" />
+        <label asp-for="RoleDescription">Description</label>
+        <span asp-validation-for="RoleDescription" class="text-danger"></span>
+    </div>
+    <button type="submit" class="w-100 btn btn-lg btn-primary">Submit</button>
+
+</form>

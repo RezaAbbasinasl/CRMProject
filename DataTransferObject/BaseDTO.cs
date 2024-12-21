@@ -12,4 +12,5 @@ public abstract class BaseDTO
     public DateTime CreatedDataTime { get; set; } = DateTime.Now;
     public DateTime? UpdatedDataTime { get; set; }
     public Guid? CreateUserId { get; set; } 
+    public Guid? UpdatedUserId { get; set; }
 }

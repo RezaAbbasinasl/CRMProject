@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shared.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,15 +22,15 @@ public class Ticket : BaseEntity
     /// <summary>
     /// The status id of ticket entity
     /// </summary>
-    public int StatusId { get; set; }
+    public int StatusId { get; set; } = (int)Statuss.Open;
     /// <summary>
     /// The priority id of ticket entity
     /// </summary>
-    public int PriorityId { get; set; }
+    public int PriorityId { get; set; } = (int)Prioritys.Medium;
     /// <summary>
     /// The scoring id of ticket entity
     /// </summary>
-    public int ScoringId { get; set; }
+    public int ScoringId { get; set; } = (int)Scoring.none;
     /// <summary>
     /// The scoring description of ticket entity
     /// </summary>
@@ -38,7 +39,7 @@ public class Ticket : BaseEntity
     /// <summary>
     /// The author id of ticket entity
     /// </summary>
-    public Guid AuthorId { get; set; }
+    public Guid? AuthorId { get; set; }
     /// <summary>
     /// The author of ticket entity
     /// </summary>

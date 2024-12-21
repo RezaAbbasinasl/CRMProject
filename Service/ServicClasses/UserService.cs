@@ -33,11 +33,11 @@ public class UserService : IUserService
         return listUser;
     }
 
-    public async Task<User> GetUser(Guid id)
+    public async Task<User> GetUser(string userName)
     {
-        var user = await _userManager.FindByIdAsync(id.ToString());
+        var user = await _userManager.FindByNameAsync(userName);
         if (user == null)
-            throw new Exception("");
+            throw new Exception("User not found.");
 
         return user;
     }
@@ -47,12 +47,12 @@ public class UserService : IUserService
         var userFind = await _userManager.FindByIdAsync(id.ToString());
 
         if (userFind == null)
-            throw new Exception("");
+            throw new Exception("User not found.");
 
         var deleteResult = await _userManager.DeleteAsync(userFind);
 
         if (!deleteResult.Succeeded)
-            throw new Exception("");
+            throw new Exception("Error deleting user");
 
         return deleteResult.Succeeded;
     }
@@ -76,7 +76,7 @@ public class UserService : IUserService
         var user = await _userManager.FindByNameAsync(username);
 
         if (user == null)
-            throw new Exception("");
+            throw new Exception("User not found.");
 
         await _signInManager.SignOutAsync();
     }
@@ -86,7 +86,7 @@ public class UserService : IUserService
         var duplicateUser = await _userManager.FindByNameAsync(userDTO.UserName);
         
         if (duplicateUser != null)
-            throw new Exception("");
+            throw new Exception("There is a user with this username.");
 
         var user = userDTO.Adapt<User>();
         user.Id = Guid.NewGuid();
@@ -105,25 +105,30 @@ public class UserService : IUserService
         var userFind = await _userManager.FindByIdAsync(id.ToString());
 
         if (userFind == null)
-            throw new Exception("");
+            throw new Exception("User not found.");
 
         userFind.IsActive = false;
         
-        return await UpdateAsync(userFind.Adapt<UserDTO>());
+        return await UpdateAsync(userFind.Adapt<EditProfileDTO>(),userFind.UserName);
     }
 
-    public async Task<bool> UpdateAsync(UserDTO userDTO)
+    public async Task<bool> UpdateAsync(EditProfileDTO userDTO , string userName)
     {
-        var userFind = await _userManager.FindByNameAsync(userDTO.UserName);
+        var userFind = await _userManager.FindByNameAsync(userName);
 
         if (userFind == null)
-            throw new Exception("");
+            throw new Exception("User not found.");
 
-        var user = userDTO.Adapt<User>();
-        var updateResult = await _userManager.UpdateAsync(user);
+        userFind.UpdatedUserId = userFind.Id;
+        userFind.PhoneNumber = userDTO.Phone;
+        userFind.FirstName = userDTO.FirstName;
+        userFind.LastName = userDTO.LastName;
+        userFind.Email = userDTO.Email;
+
+        var updateResult = await _userManager.UpdateAsync(userFind);
 
         if (!updateResult.Succeeded)
-            throw new Exception("");
+            throw new Exception("User update failed");
 
         return updateResult.Succeeded;
     }

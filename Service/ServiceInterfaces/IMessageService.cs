@@ -10,6 +10,8 @@ namespace Service.ServiceInterfaces;
 
 public interface IMessageService 
 {
-    Task<bool> AddMessage(MessageDTO message);
-    Task<List<MessageDTO>> AllMessage(Guid userId);
+    Task<bool> AddMessage(MessageDTO message, Guid userId, Guid ticketId);
+    Task<List<MessageDTO>> AllMessageByTicketId(Guid ticketId);
+    Task<List<MessageDTO>> AllMessageByUserId(Guid userId,Guid ticketId);
+
 }
