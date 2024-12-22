@@ -1,0 +1,20 @@
+﻿@model RoleDTO
+
+<form class="form-group" method="post" asp-action="Edit">
+    <div class="mb-3">
+        <label asp-for="@Model.Name" class="form-label">Name</label>
+        <input asp-for="@Model.Name" class="form-control" id="RoleNameInput">
+        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="@Model.RoleDescription" class="form-label">Post text</label>
+        <input asp-for="@Model.RoleDescription" class="form-control" id="RoleDescriptionInput">
+        <span asp-validation-for="@Model.RoleDescription" class="text-danger"></span>
+    </div>
+    <div class="mb-3 d-none">
+        <input asp-for="@Model.Id" class="form-control" id="RoleIdInput">
+        <input asp-for="@Model.CreateUserId" class="form-control" id="RoleIdInput">
+    </div>
+    <button type="submit" class="btn btn-outline-info">Update</button>
+    <a class="btn btn-outline-secondary" asp-page="/Role/GetAll">Cancel</a>
+</form>

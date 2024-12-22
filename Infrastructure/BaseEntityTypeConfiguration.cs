@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure;
 
-internal class BaseEntityTypeConfiguration<T, KeyTypeId> : IEntityTypeConfiguration<T> where T : BaseEntity<KeyTypeId> where KeyTypeId : struct
+internal class BaseEntityTypeConfiguration<T> : IEntityTypeConfiguration<T> where T : BaseEntity
 {
     protected bool GeneratedValueForKey { get; set; } = true;
 

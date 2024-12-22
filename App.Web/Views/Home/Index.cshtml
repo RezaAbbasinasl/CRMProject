@@ -1,0 +1,11 @@
+﻿
+<div class="text-center">
+    @if (User.Identity?.IsAuthenticated ?? true)
+    {
+        <h1 class="display-4">Welcome <b>@User.Identity.Name</b></h1>
+    }
+    @if (!User.Identity?.IsAuthenticated ?? true)
+    {
+        <h2>Please login or create an account</h2>
+    }    
+</div>

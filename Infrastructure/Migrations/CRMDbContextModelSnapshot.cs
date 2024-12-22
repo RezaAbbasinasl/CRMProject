@@ -259,7 +259,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("CreatedDataTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 11, 27, 7, 24, 29, 200, DateTimeKind.Local).AddTicks(6827));
+                        .HasDefaultValue(new DateTime(2024, 12, 18, 13, 42, 45, 741, DateTimeKind.Local).AddTicks(8858));
 
                     b.Property<Guid?>("CreatedUserId")
                         .IsRequired()
@@ -307,7 +307,7 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AuthorId")
+                    b.Property<Guid?>("AuthorId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CategoryId")
@@ -382,7 +382,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("CreatedDataTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 11, 27, 7, 24, 29, 205, DateTimeKind.Local).AddTicks(4629));
+                        .HasDefaultValue(new DateTime(2024, 12, 18, 13, 42, 45, 744, DateTimeKind.Local).AddTicks(7544));
 
                     b.Property<Guid?>("CreatedUserId")
                         .IsRequired()
@@ -532,7 +532,7 @@ namespace Infrastructure.Migrations
                     b.HasOne("Model.Entities.Departement", "Departement")
                         .WithMany("Categories")
                         .HasForeignKey("DepartementId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Model.Entities.User", "UpdatedUser")
@@ -569,7 +569,7 @@ namespace Infrastructure.Migrations
                     b.HasOne("Model.Entities.User", "Athure")
                         .WithMany("Messages")
                         .HasForeignKey("AthureId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Model.Entities.User", "CreatedUser")
@@ -580,7 +580,7 @@ namespace Infrastructure.Migrations
                     b.HasOne("Model.Entities.Ticket", "Ticket")
                         .WithMany("Messages")
                         .HasForeignKey("TicketId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Model.Entities.User", "UpdatedUser")
@@ -620,13 +620,12 @@ namespace Infrastructure.Migrations
                     b.HasOne("Model.Entities.User", "Author")
                         .WithMany("Tickets")
                         .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Model.Entities.Category", "Category")
                         .WithMany("Tickets")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Model.Entities.User", "CreatedUser")

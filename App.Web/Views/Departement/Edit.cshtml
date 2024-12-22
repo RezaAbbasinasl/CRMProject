@@ -1,0 +1,19 @@
+﻿@model DepartementDTO
+
+<form class="form-group" method="post" asp-action="Edit">
+    <div class="mb-3">
+        <label asp-for="@Model.Name" class="form-label">Name</label>
+        <input asp-for="@Model.Name" class="form-control" id="departementNameInput">
+        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="@Model.Description" class="form-label">Description</label>
+        <input asp-for="@Model.Description" class="form-control" id="departementDescriptionInput">
+        <span asp-validation-for="@Model.Description" class="text-danger"></span>
+    </div>
+    <div class="mb-3 d-none">
+        <input asp-for="@Model.Id" class="form-control" id="departementIdInput">
+    </div>
+    <button type="submit" class="btn btn-outline-info">Update</button>
+    <a class="btn btn-outline-secondary" asp-page="/Departement/GetAll">Cancel</a>
+</form>

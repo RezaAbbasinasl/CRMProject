@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.TableConfig;
 
-internal class MessageConfig : BaseEntityTypeConfiguration<Message, Guid>
+internal class MessageConfig : BaseEntityTypeConfiguration<Message>
 {
     public override void Configure(EntityTypeBuilder<Message> builder)
     {
@@ -23,6 +23,6 @@ internal class MessageConfig : BaseEntityTypeConfiguration<Message, Guid>
 
         builder.Property(m => m.Content).IsRequired().HasColumnType(SqlDbType.NVarChar.ToString()).HasMaxLength(600);
 
-        builder.HasOne(m => m.Athure).WithMany(m => m.Messages).HasForeignKey(m => m.AthureId).OnDelete(DeleteBehavior.NoAction);
+        builder.HasOne(m => m.Athure).WithMany(m => m.Messages).HasForeignKey(m => m.AthureId).OnDelete(DeleteBehavior.Cascade);
     }
 }

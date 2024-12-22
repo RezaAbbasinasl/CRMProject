@@ -8,7 +8,7 @@ namespace Model.Entities;
 /// <summary>
 /// Departement Entity
 /// </summary>
-public class Departement : BaseEntity<Guid>
+public class Departement : BaseEntity
 {
     /// <summary>
     /// The departement name of departement entity 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.TableConfig;
 
-internal class DepartementConfig : BaseEntityTypeConfiguration<Departement, Guid>
+internal class DepartementConfig : BaseEntityTypeConfiguration<Departement>
 {
     public override void Configure(EntityTypeBuilder<Departement> builder)
     {

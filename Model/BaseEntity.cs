@@ -11,12 +11,12 @@ namespace Model;
 /// The base entity
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class BaseEntity<T> where T : struct
+public class BaseEntity
 {
     /// <summary>
     /// The type Id field in each table has created in system
     /// </summary>
-    public T Id { get; set; }
+    public Guid Id { get; set; }
     /// <summary>
     /// 
     /// </summary>

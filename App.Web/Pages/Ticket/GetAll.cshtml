@@ -1,0 +1,87 @@
+﻿@page
+@model App.Web.Pages.Ticket.GetAllModel
+
+<div class="p-3">
+    <div>
+        <a class="btn btn-outline-success" asp-page="Create">New Ticket</a>
+    </div>
+</div>
+<div class="card mb-4">
+    <div class="card-header text-center">
+        <i class="me-1 ">Ticket List</i>
+    </div>
+    <br />
+    <div class="card col-lg-4">
+        <input type="text" id="searchBox" class="form-control" placeholder="Ticket Subject" />
+    </div>
+    <div class="col-lg-3">
+        <button class="btn btn-primary mt-2" onclick="searchTicketWithPagination(1)">Search</button>
+        <button class="btn btn-secondary mt-2" onclick="searchReset()">Reset</button>
+    </div>
+    <br />
+    <div class="table-responsive col-lg-8" id="data-container">
+        <table class="table">
+            <tbody>
+
+                @foreach (var item in Model.Input)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(model => item.Subject)</td>
+                        <td>@Html.DisplayFor(model => item.Description)</td>
+                        <td><a class="dropdown-item" asp-page="Chat" asp-route-id="@item.Id">Chat</a></td>
+                        <td><a class="dropdown-item text-danger" asp-page="Delete" asp-route-id="@item.Id">Delete</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination">
+                @if (Model.Input.HasPreviousPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="#" onclick="searchTicketWithPagination(@(Model.Input.PageIndex - 1))">Previous</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link">Previous</span>
+                    </li>
+                }
+
+                @for (int i = 1; i <= Model.Input.TotalPage; i++)
+                {
+                    if (i == Model.Input.PageIndex)
+                    {
+                        <li class="page-item active">
+                            <span class="page-link">@i <span class="sr-only"></span></span>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="#" onclick="searchTicketWithPagination(@i)">@i</a>
+                        </li>
+                    }
+                }
+
+                @if (Model.Input.HasNextPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="#" onclick="searchTicketWithPagination(@(Model.Input.PageIndex + 1))">Next</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link">Next</span>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/site.js" asp-append-version="true"></script>
+}
